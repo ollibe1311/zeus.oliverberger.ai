@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Zeus — AI Agent Implementation</title>
+    <meta name="description" content="Stop hand-holding AI. Start employing it. Project Zeus helps companies deploy autonomous AI agents — operational workflows and coding agent systems that actually do the work.">
+    <meta property="og:title" content="Project Zeus — AI Agent Implementation">
+    <meta property="og:description" content="Stop hand-holding AI. Start employing it. We help companies go from AI curiosity to autonomous agents.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --bg: #ffffff; --text: #000000; --red: #ff3333; --border: #000000; --muted: #555; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text);
+            line-height: 1.7; font-size: 14px;
+        }
+        nav {
+            position: sticky; top: 0; z-index: 100; background: var(--bg);
+            border-bottom: 3px solid var(--border); padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; }
+        .nav-links a:hover { color: var(--red); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 80px 0; border-bottom: 2px solid var(--border); }
+        h1, h2, h3 { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; }
+        .hero {
+            min-height: 90vh; display: flex; align-items: center; padding-top: 60px;
+        }
+        .hero-text { max-width: 800px; }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.15;
+            margin-bottom: 1.5rem; border-left: 6px solid var(--red); padding-left: 1.5rem;
+        }
+        .hero p { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin-bottom: 2.5rem; }
+        .btn {
+            display: inline-block; padding: 16px 40px; background: var(--text); color: var(--bg);
+            font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.9rem;
+            text-decoration: none; border: 3px solid var(--border); cursor: pointer;
+            text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s;
+            border-left: 6px solid var(--red);
+        }
+        .btn:hover { background: var(--red); border-color: var(--red); transform: skew(-1deg); }
+        h2 {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 800; margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--red); display: inline-block; padding-bottom: 0.25rem;
+        }
+        h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--red); }
+        .gap-section p { color: var(--muted); font-size: 0.9rem; max-width: 700px; line-height: 1.9; }
+        .loss-line { color: var(--red); font-weight: 700; font-size: 0.85rem; margin-top: 1.5rem; }
+        .hp { position: absolute; left: -9999px; }
+        .founder-narrative {
+            font-size: 0.95rem; color: var(--text); font-weight: 600;
+            margin-bottom: 2rem; border-left: 4px solid var(--red); padding-left: 1rem;
+        }
+        .founder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 2.5rem; }
+        .founder-card { border: 2px solid var(--border); padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
+        .founder-card:first-child { border-right: 1px solid var(--border); }
+        .founder-card:last-child { border-left: 1px solid var(--border); }
+        .founder-card img {
+            width: 100px; height: 120px; flex-shrink: 0;
+            border: 3px solid var(--border); object-fit: cover;
+            filter: grayscale(100%) contrast(1.1);
+        }
+        .founder-info h3 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .founder-role { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+        .founder-creds {
+            font-size: 0.7rem; color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.03em; line-height: 1.8;
+        }
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 2rem; }
+        .service-card { border: 2px solid var(--border); padding: 2rem; }
+        .service-card:first-child { border-right: 1px solid var(--border); }
+        .service-card:last-child { border-left: 1px solid var(--border); }
+        .service-card .sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.25rem; font-style: italic; }
+        .service-card ul { list-style: none; }
+        .service-card li {
+            font-size: 0.85rem; margin-bottom: 0.6rem; line-height: 1.6;
+        }
+        .service-card li::before { content: '> '; color: var(--red); font-weight: 700; }
+        .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 2rem; }
+        .audience-card { border: 2px solid var(--border); padding: 1.5rem; margin-top: -2px; margin-left: -2px; }
+        .audience-card h3 { font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .audience-card p { color: var(--muted); font-size: 0.8rem; line-height: 1.7; }
+        .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+        .test-card { border: 2px solid var(--border); padding: 1.5rem; }
+        .test-card:nth-child(2) { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+        .test-card blockquote {
+            font-size: 0.85rem; font-style: normal; line-height: 1.7;
+            margin-bottom: 0.75rem; border-left: 3px solid var(--red); padding-left: 1rem;
+        }
+        .test-card blockquote::before { content: '// '; color: var(--red); }
+        .test-card .cite-row { display: flex; align-items: center; gap: 10px; }
+        .test-card .headshot {
+            width: 36px; height: 36px; border-radius: 0; border: 2px solid var(--border);
+            object-fit: cover; filter: grayscale(100%);
+        }
+        .test-card cite { font-style: normal; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 2rem; }
+        .step { border: 2px solid var(--border); padding: 1.5rem; }
+        .step:nth-child(2) { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+        .step-num { font-size: 2rem; font-weight: 800; color: var(--red); display: block; margin-bottom: 0.5rem; }
+        .step p { color: var(--muted); font-size: 0.8rem; line-height: 1.7; }
+        .objection { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; border-left: 3px solid var(--red); padding-left: 1rem; }
+        .contact-section .sub { color: var(--muted); margin-bottom: 1rem; font-size: 0.9rem; }
+        .contact-form { max-width: 500px; display: flex; flex-direction: column; gap: 1rem; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 12px 14px; background: var(--bg);
+            border: 2px solid var(--border); color: var(--text);
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; outline: none;
+        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #aaa; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--red); }
+        .contact-form textarea { min-height: 120px; resize: vertical; }
+        .contact-form .btn { width: 100%; text-align: center; }
+        footer {
+            padding: 2rem; font-size: 0.75rem; color: var(--muted);
+            text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        @media (max-width: 768px) {
+            .founder-grid { grid-template-columns: 1fr; }
+            .founder-card:first-child, .founder-card:last-child { border: 2px solid var(--border); }
+            .founder-card:last-child { border-top: 0; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card:first-child, .service-card:last-child { border: 2px solid var(--border); }
+            .audience-grid { grid-template-columns: 1fr; }
+            .test-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .step:nth-child(2) { border: 2px solid var(--border); }
+            .test-card:nth-child(2) { border: 2px solid var(--border); }
+            .nav-links { display: none; }
+            section { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="nav-logo">[PROJECT ZEUS] <span style="color:var(--red);font-size:1.3rem;">&#9889;</span></a>
+        <ul class="nav-links">
+            <li><a href="#gap">/the-gap</a></li>
+            <li><a href="#services">/services</a></li>
+            <li><a href="#how">/how-it-works</a></li>
+            <li><a href="#contact">/contact</a></li>
+        </ul>
+    </nav>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Everyone's talking about AI agents. Nobody knows where to start.</h1>
+                <p>Stop hand-holding AI. Start employing it.</p>
+                <a href="#contact" class="btn">Get in touch &rarr;</a>
+            </div>
+        </div>
+    </section>
+    <section id="gap" class="gap-section">
+        <div class="container">
+            <h2>The gap between using AI and employing AI</h2>
+            <p>Your team uses ChatGPT. Your devs co-author code with Copilot. But nobody's running agents end-to-end. The real value isn't in prompting — it's in deploying autonomous systems that actually do the work. Most companies are stuck hand-holding AI instead of employing it.</p>
+            <p class="loss-line">every week you wait, your competitors get further ahead.</p>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <h2>The Team</h2>
+            <p class="founder-narrative">We built and exited a company together. Now we build AI agents for yours.</p>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <img src="oliver-berger.jpg" alt="Oliver Berger">
+                    <div class="founder-info">
+                        <h3>Oliver Berger</h3>
+                        <p class="founder-role">Product &amp; Strategy</p>
+                        <p class="founder-creds">GorillaStack Co-Founder (Exit) &middot; Platform Direct Finance Founder (Exit) &middot; CPO @ Stake &middot; Head of International Product @ MySpace &middot; eBay</p>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <img src="elliott-spira.jpg" alt="Elliott Spira">
+                    <div class="founder-info">
+                        <h3>Elliott Spira</h3>
+                        <p class="founder-role">Engineering &amp; Infrastructure</p>
+                        <p class="founder-creds">GorillaStack Co-Founder &amp; CTO (Exit) &middot; CTO of Cloud @ SoftwareONE &middot; Snyk CTO Office &middot; Port IO Field CTO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services">
+        <div class="container">
+            <h2>What We Do</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Operational Agents</h3>
+                    <p class="sub">// Automate the work that drains your best people</p>
+                    <ul>
+                        <li>Board reporting and analysis that runs itself</li>
+                        <li>Customer ops, support triage, and first-response agents that scale without headcount</li>
+                        <li>Business intelligence agents that surface insights daily</li>
+                        <li>Lead scoring, pipeline updates, and follow-up sequences on autopilot</li>
+                        <li>CV screening, interview scheduling, and candidate comms</li>
+                        <li>Expense reconciliation, invoicing, and AP/AR automation</li>
+                        <li>Compliance checks, policy audits, and document review</li>
+                        <li>Internal knowledge agents that search, summarise, and surface answers</li>
+                        <li>Market research, competitor intel, and due diligence automation</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>Coding Agent Workflows</h3>
+                    <p class="sub">// Go from co-authoring to autonomous development</p>
+                    <ul>
+                        <li>Set up methodologies for teams running 5-6 agents in parallel</li>
+                        <li>End-to-end agent workflows with human-in-the-loop reviews</li>
+                        <li>Move beyond hand-holding to genuine agent autonomy</li>
+                        <li>Automated PR generation, code review, and merge pipelines</li>
+                        <li>Test generation and coverage agents that write tests as code ships</li>
+                        <li>Bug triage agents that reproduce, diagnose, and propose fixes</li>
+                        <li>Refactoring agents that clean up tech debt while your team builds features</li>
+                        <li>Multi-repo orchestration — agents working across services in parallel</li>
+                        <li>Security scanning agents that flag vulnerabilities before they ship</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="how">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps-grid">
+                <div class="step"><span class="step-num">01</span><h3>We Talk</h3><p>You tell us where the pain is. We tell you if agents can fix it.</p></div>
+                <div class="step"><span class="step-num">02</span><h3>We Audit</h3><p>We map your workflows and identify the highest-leverage opportunities for agents.</p></div>
+                <div class="step"><span class="step-num">03</span><h3>Agents Ship</h3><p>We build and deploy agents that run autonomously — with your team trained to manage them.</p></div>
+            </div>
+            <div style="margin-top: 2.5rem;"><a href="#contact" class="btn">Get in touch &rarr;</a></div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <h2>Who This Is For</h2>
+            <div class="audience-grid">
+                <div class="audience-card"><h3>CEOs &amp; Founders</h3><p>You know AI matters but don't know where to begin. Nobody in the business has the bandwidth.</p></div>
+                <div class="audience-card"><h3>Engineering Leaders</h3><p>Your devs use AI tools but aren't getting autonomous output. You want agents checking code in and out, not just suggesting.</p></div>
+                <div class="audience-card"><h3>Ops &amp; RevOps Leaders</h3><p>Your team is drowning in manual workflows. You need systems that scale without scaling headcount.</p></div>
+                <div class="audience-card"><h3>Scale-Up CTOs</h3><p>Your engineering team is small but your roadmap isn't. Agents let 5 people ship like 20.</p></div>
+                <div class="audience-card"><h3>Heads of Growth</h3><p>You're doing reporting, analysis, and customer ops by hand. Agents free your team to focus on what actually moves the needle.</p></div>
+                <div class="audience-card"><h3>COOs &amp; Operations</h3><p>Every process that relies on someone remembering to do it is a process that can break. Agents don't forget.</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Let's Talk</h2>
+            <p class="sub">Tell us what you're trying to solve. We'll tell you if agents can help.</p>
+            <p class="objection">No long-term contracts. No platform lock-in. Start with a single workflow.</p>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="name_" required>
+                <input type="email" name="email" placeholder="email_" required>
+                <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off">
+                <textarea name="message" placeholder="message_" required></textarea>
+                <button type="submit" class="btn">Send our team a message &rarr;</button>
+            </form>
+        </div>
+    </section>
+    <footer><div class="container"><p>Project Zeus</p></div></footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (this.website.value) return;
+            var n = this.name.value, em = this.email.value, msg = this.message.value;
+            var a = ['oliver','berger','xyz'].join('.');
+            var d = ['gmail','com'].join('.');
+            var addr = a + '@' + d;
+            var subject = encodeURIComponent('Project Zeus enquiry from ' + n);
+            var body = encodeURIComponent('From: ' + n + ' (' + em + ')\n\n' + msg);
+            window.location.href = 'mailto:' + addr + '?subject=' + subject + '&body=' + body;
+        });
+    </script>
+</body>
+</html>
