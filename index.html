@@ -52,8 +52,8 @@
             font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 800; margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--red); display: inline-block; padding-bottom: 0.25rem;
         }
-        h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--red); }
-        .gap-section p { color: var(--muted); font-size: 0.9rem; max-width: 700px; line-height: 1.9; }
+        h3 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--red); }
+        .gap-section p { color: var(--muted); font-size: 0.85rem; max-width: 700px; line-height: 1.9; }
         .loss-line { color: var(--red); font-weight: 700; font-size: 0.85rem; margin-top: 1.5rem; }
         .hp { position: absolute; left: -9999px; }
         .founder-narrative {
@@ -69,14 +69,14 @@
             border: 3px solid var(--border); object-fit: cover;
             filter: grayscale(100%) contrast(1.1);
         }
-        .founder-info h3 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .founder-info h3 { margin-bottom: 0.25rem; }
         .founder-role { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
         .founder-creds {
             font-size: 0.7rem; color: var(--muted); text-transform: uppercase;
             letter-spacing: 0.03em; line-height: 1.8;
         }
-        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 2rem; }
-        .service-card { border: 2px solid var(--border); padding: 2rem; }
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+        .service-card { border: 2px solid var(--border); padding: 1.5rem; }
         .service-card:first-child { border-right: 1px solid var(--border); }
         .service-card:last-child { border-left: 1px solid var(--border); }
         .service-card .sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.25rem; font-style: italic; }
@@ -85,10 +85,10 @@
             font-size: 0.85rem; margin-bottom: 0.6rem; line-height: 1.6;
         }
         .service-card li::before { content: '> '; color: var(--red); font-weight: 700; }
-        .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 2rem; }
+        .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
         .audience-card { border: 2px solid var(--border); padding: 1.5rem; margin-top: -2px; margin-left: -2px; }
-        .audience-card h3 { font-size: 0.85rem; margin-bottom: 0.5rem; }
-        .audience-card p { color: var(--muted); font-size: 0.8rem; line-height: 1.7; }
+        .audience-card h3 { margin-bottom: 0.5rem; }
+        .audience-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
         .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
         .test-card { border: 2px solid var(--border); padding: 1.5rem; }
         .test-card:nth-child(2) { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
@@ -103,11 +103,11 @@
             object-fit: cover; filter: grayscale(100%);
         }
         .test-card cite { font-style: normal; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
-        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 2rem; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
         .step { border: 2px solid var(--border); padding: 1.5rem; }
         .step:nth-child(2) { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
         .step-num { font-size: 2rem; font-weight: 800; color: var(--red); display: block; margin-bottom: 0.5rem; }
-        .step p { color: var(--muted); font-size: 0.8rem; line-height: 1.7; }
+        .step p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
         .objection { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.5rem; border-left: 3px solid var(--red); padding-left: 1rem; }
         .contact-section .sub { color: var(--muted); margin-bottom: 1rem; font-size: 0.9rem; }
         .contact-form { max-width: 500px; display: flex; flex-direction: column; gap: 1rem; }
@@ -130,6 +130,7 @@
             .founder-card:last-child { border-top: 0; }
             .services-grid { grid-template-columns: 1fr; }
             .service-card:first-child, .service-card:last-child { border: 2px solid var(--border); }
+            .service-card:last-child { border-top: 0; }
             .audience-grid { grid-template-columns: 1fr; }
             .test-grid { grid-template-columns: 1fr; }
             .steps-grid { grid-template-columns: 1fr; }
@@ -166,7 +167,7 @@
             <p class="loss-line">Every week you wait, your competitors get further ahead.</p>
         </div>
     </section>
-    <section>
+    <section id="team">
         <div class="container">
             <h2>The Team</h2>
             <p class="founder-narrative">We built and exited a company together. Now we build AI agents for yours.</p>
@@ -238,7 +239,7 @@
             <div style="margin-top: 2.5rem;"><a href="#contact" class="btn">Get in touch &rarr;</a></div>
         </div>
     </section>
-    <section>
+    <section id="audience">
         <div class="container">
             <h2>Who This Is For</h2>
             <div class="audience-grid">
